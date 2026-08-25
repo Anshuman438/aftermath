@@ -39,12 +39,12 @@ Write-Host "`n[3/4] Starting Aftermath Web Dashboard UI..." -ForegroundColor Yel
 $ui = Start-Process "npm.cmd" -ArgumentList "run", "dev" -WorkingDirectory "$root\aftermath-ui" -PassThru
 
 Write-Host "`n==========================================================================" -ForegroundColor Green
-Write-Host "            🚀 AFTERMATH SYSTEM IS ONLINE AND READY!                     " -ForegroundColor Green
+Write-Host "            AFTERMATH SYSTEM IS ONLINE AND READY!                         " -ForegroundColor Green
 Write-Host "==========================================================================" -ForegroundColor Green
-Write-Host "  🌐 Web Dashboard:    http://localhost:5173" -ForegroundColor White
-Write-Host "  📡 Collector API:     http://localhost:8090/api/v1/incidents" -ForegroundColor White
-Write-Host "  💳 Payment Service:   http://localhost:8082/api/payments" -ForegroundColor White
-Write-Host "  🏷️  Coupon Service:    http://localhost:8081/api/coupons/SAVE10" -ForegroundColor White
+Write-Host "  * Web Dashboard:    http://localhost:5173" -ForegroundColor White
+Write-Host "  * Collector API:     http://localhost:8090/api/v1/incidents" -ForegroundColor White
+Write-Host "  * Payment Service:   http://localhost:8082/api/payments" -ForegroundColor White
+Write-Host "  * Coupon Service:    http://localhost:8081/api/coupons/SAVE10" -ForegroundColor White
 Write-Host "==========================================================================" -ForegroundColor Green
 Write-Host "`nPress CTRL+C in this window or close it to stop all background services."
 
