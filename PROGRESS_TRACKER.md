@@ -49,14 +49,21 @@
 
 ---
 
-## 5. Phase 2 — Collector Service & Storage — ⏳ IN PROGRESS
+## 5. Phase 2 — Collector Service & Storage — ✅ COMPLETED
 
-- **5.1 Collector Module Setup** — 📋 Pending
-- **5.2 Collector Package Structure** — 📋 Pending
+- **5.1 Collector Module Setup** — ✅ Built `aftermath-collector` service (Port 8090) with Spring Boot 3.3.0, Spring Data JPA, SQLite, and H2 drivers
+- **5.2 Collector Package Structure** — ✅ Created entity (`IncidentEntity`, `EvidenceEntity`, `ReplayJobEntity`, `TestArtifactEntity`), repository, service, controller, and DTO packages
+- **5.3 SQLite Database Storage** — ✅ Configured database persistence for storing incident capsules, header/body evidence items, and trace context
+- **5.4 REST API Endpoints** — ✅ Implemented `POST /api/v1/incidents`, `GET /api/v1/incidents`, `GET /api/v1/incidents/{incidentId}` with pagination and search
+- **5.5 CORS Configuration** — ✅ Configured `CorsConfig` allowing Vite frontend (`http://localhost:5173`)
+- **5.6 End-to-End E2E Integration Test** — ✅ Verified end-to-end pipeline: `payment-service` 500 error -> `aftermath-sdk` interception & redaction -> `aftermath-collector` HTTP API -> SQLite DB persistence
 
 ---
 
-## 6. Phase 3 — Local Web UI — 📋 PENDING
+## 6. Phase 3 — Local Web UI — ⏳ IN PROGRESS
+
+- **6.1 UI Module Setup** — 📋 Pending
+- **6.2 Dashboard & Incident Explorer** — 📋 Pending
 
 ---
 
