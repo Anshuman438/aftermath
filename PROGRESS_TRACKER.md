@@ -107,8 +107,13 @@
 ## 11. Phase 8 — Documentation & Release — ✅ COMPLETED
 
 - **11.1 System Documentation** — ✅ Created comprehensive root `README.md` with system architecture diagrams, quickstart guide, SDK integration guide, and API reference
-- **11.2 Release Versioning** — ✅ Version v1.0.0 tagged and published to GitHub
+- **11.2 Release Versioning** — ✅ Version `v1.0.0` tagged and published to GitHub
 
 ---
 
-## 12. Phase 9 — Post-MVP Enhancements — 📋 PENDING
+## 12. Phase 9 — Post-MVP Enhancements — ⏳ IN PROGRESS
+
+- **12.1 Zero-Touch Developer Auto-Attacher (`aftermath attach`)** — ✅ Implemented `ProjectDetector`, `PomXmlInjector`, `YamlConfigInjector`, and `AttachCommand` (Released in `v1.1.0`)
+- **12.2 IDE Plugin / VS Code Extension Integration** — 📋 Planned
+- **12.3 Asynchronous Kafka Event Transport** — 📋 Planned
+- **12.4 OpenTelemetry Distributed Tracing Integration** — 📋 Planned
