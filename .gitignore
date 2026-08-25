@@ -1,0 +1,25 @@
+# Java
+target/
+*.class
+*.jar
+*.war
+*.log
+.idea/
+*.iml
+
+# Node
+node_modules/
+dist/
+.env
+.env.local
+
+# Docker
+docker-compose.override.yml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# SQLite
+*.db
+*.sqlite
