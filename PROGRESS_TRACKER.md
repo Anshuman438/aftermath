@@ -35,21 +35,21 @@
 
 ---
 
-## 4. Phase 1 — Capture SDK — ⏳ IN PROGRESS
+## 4. Phase 1 — Capture SDK — ✅ COMPLETED
 
-- **4.1 SDK Module Setup** — 📋 Pending
-- **4.2 SDK Package Structure** — 📋 Pending
-- **4.3 Core Component: Capture Filter** — 📋 Pending
-- **4.4 Core Component: Redaction Engine** — 📋 Pending
-- **4.5 Core Component: Event Transport** — 📋 Pending
-- **4.6 Auto-Configuration** — 📋 Pending
-- **4.7 Integrate SDK into Sample App** — 📋 Pending
-- **4.8 SDK Test Suite** — 📋 Pending
-- **4.9 Phase 1 Checklist** — 📋 Pending
+- **4.1 SDK Module Setup** — ✅ Built `aftermath-sdk` JAR module with Spring Boot 3.3.0 & Jackson dependencies
+- **4.2 SDK Package Structure** — ✅ Created model (`IncidentEvent`, `RequestSnapshot`, `ErrorSnapshot`, `DeploymentInfo`), capture, redaction, transport, and context packages
+- **4.3 Core Component: Capture Filter** — ✅ Implemented `CaptureFilter`, `RequestWrapper`, `ResponseWrapper`, and `FailureDetector`
+- **4.4 Core Component: Redaction Engine** — ✅ Implemented `RedactionEngine`, `HeaderRedactor`, `BodyRedactor`, and `PatternRegistry` (masks Bearer tokens, cookies, email, phone, CC, PII)
+- **4.5 Core Component: Event Transport** — ✅ Implemented `HttpEventTransport`, `LogEventTransport`, and fail-open `AsyncEventDispatcher` (bounded queue & daemon threads)
+- **4.6 Auto-Configuration** — ✅ Implemented `@AutoConfiguration` in `AftermathAutoConfiguration` registered via `AutoConfiguration.imports`
+- **4.7 Integrate SDK into Sample App** — ✅ Integrated `aftermath-sdk` into `payment-service`
+- **4.8 SDK Test Suite** — ✅ Written and verified unit tests (`RedactionEngineTest`, `FailOpenTest`)
+- **4.9 Phase 1 Checklist** — ✅ Verified `CaptureFilter` in action on `PaymentService` failure stack trace
 
 ---
 
-## 5. Phase 2 — Collector Service & Storage — 📋 PENDING
+## 5. Phase 2 — Collector Service & Storage — ⏳ IN PROGRESS
 
 - **5.1 Collector Module Setup** — 📋 Pending
 - **5.2 Collector Package Structure** — 📋 Pending
