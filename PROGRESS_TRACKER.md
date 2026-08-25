@@ -88,14 +88,19 @@
 
 ---
 
-## 9. Phase 6 — CLI Tool — ⏳ IN PROGRESS
+## 9. Phase 6 — CLI Tool — ✅ COMPLETED
 
-- **9.1 CLI Module Setup** — 📋 Pending
-- **9.2 CLI Commands** — 📋 Pending
+- **9.1 CLI Module Setup** — ✅ Built `aftermath-cli` module with Picocli & Spring Boot CLI framework
+- **9.2 CLI Subcommands** — ✅ Implemented `aftermath status`, `aftermath list`, `aftermath view <incident-id>`, `aftermath replay <incident-id>`, and `aftermath testgen <incident-id>`
+- **9.3 Monorepo Packaging** — ✅ Packaged executable `aftermath-cli-0.1.0-SNAPSHOT.jar`
+- **9.4 End-to-End CLI Test** — ✅ Verified CLI status and table formatting against live Collector service
 
 ---
 
-## 10. Phase 7 — Integration, Polish & Hardening — 📋 PENDING
+## 10. Phase 7 — Integration, Polish & Hardening — ⏳ IN PROGRESS
+
+- **10.1 System Orchestration Script** — 📋 Pending
+- **10.2 Comprehensive E2E Verification** — 📋 Pending
 
 ---
 

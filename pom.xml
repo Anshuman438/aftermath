@@ -18,6 +18,7 @@
         <module>aftermath-replay</module>
         <module>aftermath-collector</module>
         <module>aftermath-testgen</module>
+        <module>aftermath-cli</module>
         <module>sample-app/coupon-service</module>
         <module>sample-app/payment-service</module>
     </modules>
