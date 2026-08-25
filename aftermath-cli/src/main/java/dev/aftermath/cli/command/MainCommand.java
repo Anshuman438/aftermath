@@ -8,13 +8,15 @@ import picocli.CommandLine.Command;
         name = "aftermath",
         mixinStandardHelpOptions = true,
         version = "Aftermath CLI v0.1.0",
-        description = "Production failure capture, replay, test generation, and auto-attach tool",
+        description = "Production failure capture, replay, test generation, auto-attach, and analysis tool",
         subcommands = {
                 AttachCommand.class,
                 ListCommand.class,
                 ViewCommand.class,
                 ReplayCommand.class,
                 TestGenCommand.class,
+                CurlCommand.class,
+                AnalyzeCommand.class,
                 StatusCommand.class
         }
 )

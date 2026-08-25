@@ -11,6 +11,7 @@ import java.util.Optional;
 @Repository
 public interface IncidentRepository extends JpaRepository<IncidentEntity, Long> {
     Optional<IncidentEntity> findByIncidentId(String incidentId);
+    Optional<IncidentEntity> findByFingerprint(String fingerprint);
     Page<IncidentEntity> findByServiceNameContainingIgnoreCaseOrExceptionClassContainingIgnoreCase(
             String serviceName, String exceptionClass, Pageable pageable);
 }

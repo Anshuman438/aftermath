@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertCircle, Server, ArrowRight, ShieldCheck } from 'lucide-react';
+import { AlertCircle, Server, ArrowRight, ShieldCheck, Repeat } from 'lucide-react';
 
 export default function IncidentCard({ incident, onSelect }) {
   return (
@@ -15,9 +15,15 @@ export default function IncidentCard({ incident, onSelect }) {
           <span className="font-mono text-sm font-semibold text-slate-200 group-hover:text-indigo-400 transition">
             {incident.httpMethod} {incident.requestUri}
           </span>
+          {incident.occurrenceCount > 1 && (
+            <span className="bg-amber-500/10 text-amber-400 font-mono font-bold text-[11px] px-2 py-0.5 rounded border border-amber-500/20 flex items-center gap-1">
+              <Repeat className="w-3 h-3" />
+              {incident.occurrenceCount}x
+            </span>
+          )}
         </div>
         <span className="text-[11px] font-mono text-slate-500">
-          {incident.createdAt ? new Date(incident.createdAt).toLocaleTimeString() : ''}
+          {incident.lastSeenAt ? new Date(incident.lastSeenAt).toLocaleTimeString() : (incident.createdAt ? new Date(incident.createdAt).toLocaleTimeString() : '')}
         </span>
       </div>
 

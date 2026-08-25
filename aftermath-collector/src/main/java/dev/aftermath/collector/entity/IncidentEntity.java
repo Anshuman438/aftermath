@@ -41,12 +41,24 @@ public class IncidentEntity {
     @Column(length = 50000)
     private String rawJson;
 
+    private String fingerprint;
+
+    @Builder.Default
+    private Integer occurrenceCount = 1;
+
     private LocalDateTime createdAt;
+    private LocalDateTime lastSeenAt;
 
     @PrePersist
     public void prePersist() {
         if (createdAt == null) {
             createdAt = LocalDateTime.now();
+        }
+        if (lastSeenAt == null) {
+            lastSeenAt = createdAt;
+        }
+        if (occurrenceCount == null) {
+            occurrenceCount = 1;
         }
     }
 }

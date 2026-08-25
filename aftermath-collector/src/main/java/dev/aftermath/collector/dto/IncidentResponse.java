@@ -25,5 +25,8 @@ public class IncidentResponse {
     private String exceptionMessage;
     private String stackTrace;
     private String rawJson;
+    private String fingerprint;
+    private Integer occurrenceCount;
     private LocalDateTime createdAt;
+    private LocalDateTime lastSeenAt;
 }

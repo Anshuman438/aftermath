@@ -111,9 +111,9 @@
 
 ---
 
-## 12. Phase 9 — Post-MVP Enhancements — ⏳ IN PROGRESS
+## 12. Phase 9 — Post-MVP Enhancements — ✅ COMPLETED
 
 - **12.1 Zero-Touch Developer Auto-Attacher (`aftermath attach`)** — ✅ Implemented `ProjectDetector`, `PomXmlInjector`, `YamlConfigInjector`, and `AttachCommand` (Released in `v1.1.0`)
-- **12.2 IDE Plugin / VS Code Extension Integration** — 📋 Planned
-- **12.3 Asynchronous Kafka Event Transport** — 📋 Planned
-- **12.4 OpenTelemetry Distributed Tracing Integration** — 📋 Planned
+- **12.2 SHA-256 Incident Deduplication Engine** — ✅ SHA-256 stack trace fingerprinting & occurrence counter badge (`2x`, `3x`)
+- **12.3 cURL Command Exporter (`aftermath curl`)** — ✅ Exports captured request capsules as runnable bash/powershell cURL scripts
+- **12.4 AI-Powered Root Cause Analysis (`aftermath analyze`)** — ✅ Automated stack trace parsing, failing line identification, fix recommendations, and suggested Git code diffs

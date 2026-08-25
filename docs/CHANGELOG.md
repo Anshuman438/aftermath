@@ -4,6 +4,21 @@ All notable changes to the AFTERMATH platform will be documented in this file.
 
 ---
 
+## [v1.2.0] - 2026-08-26
+
+### 🚀 Added
+- **SHA-256 Incident Deduplication Engine**:
+  - `IncidentEntity` & `IncidentResponse`: Added `fingerprint`, `occurrenceCount`, `lastSeenAt`.
+  - SHA-256 fingerprinting on `service + httpMethod + requestUri + exceptionClass + message`.
+  - Web UI: Added `occurrenceCount` badge (`2x`, `3x`) on `IncidentCard.jsx`.
+- **cURL Command Exporter**:
+  - `aftermath curl <incident-id>` CLI command to export request capsules as runnable bash/powershell cURL scripts.
+- **AI-Powered Root Cause Analysis**:
+  - `AnalysisService` & `AnalysisController`: `/api/v1/incidents/{incidentId}/analysis` endpoint.
+  - `aftermath analyze <incident-id>` CLI command outputting failing class, line number, root cause summary, recommended fix, and suggested Git code diffs.
+
+---
+
 ## [v1.1.0] - 2026-08-26
 
 ### 🚀 Added

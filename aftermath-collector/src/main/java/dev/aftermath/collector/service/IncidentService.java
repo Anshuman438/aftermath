@@ -16,8 +16,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.MessageDigest;
 import java.time.LocalDateTime;
+import java.util.HexFormat;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -31,8 +34,24 @@ public class IncidentService {
 
     @Transactional
     public IncidentResponse saveIncident(CreateIncidentRequest request) {
-        log.info("Saving incident: {} for service: {}", request.getIncidentId(),
-                request.getDeployment() != null ? request.getDeployment().getServiceName() : "unknown");
+        String serviceName = request.getDeployment() != null ? request.getDeployment().getServiceName() : "unknown";
+        String httpMethod = request.getRequest() != null ? request.getRequest().getMethod() : "POST";
+        String requestUri = request.getRequest() != null ? request.getRequest().getUri() : "/";
+        String exceptionClass = request.getError() != null ? request.getError().getExceptionClass() : "Exception";
+        String exceptionMessage = request.getError() != null ? request.getError().getMessage() : "";
+
+        String fingerprint = computeFingerprint(serviceName, httpMethod, requestUri, exceptionClass, exceptionMessage);
+
+        Optional<IncidentEntity> existing = incidentRepository.findByFingerprint(fingerprint);
+        if (existing.isPresent()) {
+            IncidentEntity entity = existing.get();
+            entity.setOccurrenceCount(entity.getOccurrenceCount() + 1);
+            entity.setLastSeenAt(LocalDateTime.now());
+            log.info("Deduplicated recurring incident: {} (occurrences: {})", entity.getIncidentId(), entity.getOccurrenceCount());
+            return mapToResponse(incidentRepository.save(entity));
+        }
+
+        log.info("Saving new incident: {} for service: {}", request.getIncidentId(), serviceName);
 
         String rawJson = null;
         try {
@@ -44,18 +63,21 @@ public class IncidentService {
         IncidentEntity entity = IncidentEntity.builder()
                 .incidentId(request.getIncidentId())
                 .traceId(request.getTraceId())
-                .serviceName(request.getDeployment() != null ? request.getDeployment().getServiceName() : null)
+                .serviceName(serviceName)
                 .serviceVersion(request.getDeployment() != null ? request.getDeployment().getServiceVersion() : null)
                 .environment(request.getDeployment() != null ? request.getDeployment().getEnvironment() : null)
                 .commitHash(request.getDeployment() != null ? request.getDeployment().getCommitHash() : null)
-                .httpMethod(request.getRequest() != null ? request.getRequest().getMethod() : null)
-                .requestUri(request.getRequest() != null ? request.getRequest().getUri() : null)
+                .httpMethod(httpMethod)
+                .requestUri(requestUri)
                 .statusCode(request.getError() != null ? request.getError().getStatusCode() : null)
-                .exceptionClass(request.getError() != null ? request.getError().getExceptionClass() : null)
-                .exceptionMessage(request.getError() != null ? request.getError().getMessage() : null)
+                .exceptionClass(exceptionClass)
+                .exceptionMessage(exceptionMessage)
                 .stackTrace(request.getError() != null ? request.getError().getStackTrace() : null)
                 .rawJson(rawJson)
+                .fingerprint(fingerprint)
+                .occurrenceCount(1)
                 .createdAt(LocalDateTime.now())
+                .lastSeenAt(LocalDateTime.now())
                 .build();
 
         IncidentEntity saved = incidentRepository.save(entity);
@@ -88,7 +110,7 @@ public class IncidentService {
     }
 
     public IncidentListResponse getIncidents(int page, int size, String search) {
-        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "lastSeenAt"));
         Page<IncidentEntity> pageResult;
 
         if (search != null && !search.isBlank()) {
@@ -117,6 +139,17 @@ public class IncidentService {
         return mapToResponse(entity);
     }
 
+    private String computeFingerprint(String service, String method, String uri, String exceptionClass, String message) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            String raw = String.format("%s|%s|%s|%s|%s", service, method, uri, exceptionClass, message != null ? message : "");
+            byte[] hash = digest.digest(raw.getBytes("UTF-8"));
+            return HexFormat.of().formatHex(hash);
+        } catch (Exception e) {
+            return service + "_" + exceptionClass;
+        }
+    }
+
     private IncidentResponse mapToResponse(IncidentEntity entity) {
         return IncidentResponse.builder()
                 .incidentId(entity.getIncidentId())
@@ -132,7 +165,10 @@ public class IncidentService {
                 .exceptionMessage(entity.getExceptionMessage())
                 .stackTrace(entity.getStackTrace())
                 .rawJson(entity.getRawJson())
+                .fingerprint(entity.getFingerprint())
+                .occurrenceCount(entity.getOccurrenceCount())
                 .createdAt(entity.getCreatedAt())
+                .lastSeenAt(entity.getLastSeenAt())
                 .build();
     }
 }
