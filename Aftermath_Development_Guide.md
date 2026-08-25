@@ -1856,6 +1856,61 @@ Recommendation: **Apache 2.0** — balances openness with enterprise trust.
 
 ---
 
+### 12.4 Phase 9.1 — Zero-Touch Developer Auto-Attacher (`aftermath attach`)
+
+> **Goal**: 1-Click Zero-Friction Developer Adoption. Attach AFTERMATH to any existing Spring Boot microservice automatically with ZERO manual code or configuration editing.  
+> **Command**: `aftermath attach`  
+
+#### 12.4.1 Architectural Data Flow
+```
+User runs 'aftermath attach' in target Java project folder
+                  │
+                  ▼
+       [Project Type Detector]
+       ├── Maven: pom.xml detected?
+       └── Gradle: build.gradle / build.gradle.kts detected?
+                  │
+                  ▼
+       [Dependency Injector]
+       ├── Parses pom.xml / build.gradle DOM
+       ├── Checks if aftermath-sdk is already present
+       └── Safely injects aftermath-sdk dependency tag
+                  │
+                  ▼
+       [Configuration Injector]
+       ├── Scans src/main/resources/ for application.yml, application.yaml, or application.properties
+       ├── Injects 'aftermath.sdk.enabled: true', 'service-name', and 'collector-url'
+       └── Creates application.yml if missing
+                  │
+                  ▼
+       [Collector Health & Binding]
+       ├── Checks if aftermath-collector is running on port 8090
+       └── Spawns background Collector instance if offline
+                  │
+                  ▼
+      ✅ "AFTERMATH successfully attached to [service-name]!"
+```
+
+#### 12.4.2 Technical Component Breakdown
+
+1. **`ProjectDetector.java`**:
+   - Detects build tool (`MAVEN`, `GRADLE`, `UNKNOWN`).
+   - Extracts project group ID, artifact ID, and name from `pom.xml`.
+
+2. **`PomXmlInjector.java`**:
+   - Uses `org.w3c.dom` XML Parser & Transformer to inject `<dependency>` into `<dependencies>`.
+   - Preserves indentation, comments, and structure.
+
+3. **`YamlConfigInjector.java`**:
+   - Uses SnakeYAML / Jackson YAML Mapper to parse `application.yml` / `application.properties`.
+   - Merges `aftermath.sdk.enabled: true`, `service-name`, and `collector-url: http://localhost:8090/api/v1/incidents`.
+
+4. **`AttachCommand.java`**:
+   - Picocli subcommand in `aftermath-cli` (`aftermath attach [--path <dir>] [--service-name <name>]`).
+
+
+---
+
 ## 13. Appendix A — Technology Reference
 
 ### 13.1 Key Dependencies & Versions

@@ -10,3 +10,12 @@ management:
     web:
       exposure:
         include: health, info
+
+# AFTERMATH Auto-Configuration Block
+aftermath:
+  sdk:
+    enabled: true
+    service-name: coupon-service
+    service-version: 1.0.0
+    collector-url: http://localhost:8090/api/v1/incidents
+    fail-open: true
