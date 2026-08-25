@@ -5,7 +5,9 @@
 
 $javaExe = 'C:\Program Files\Eclipse Adoptium\jdk-21.0.12.101-hotspot\bin\java.exe'
 $mavenCmd = 'C:\Users\Singh\maven\apache-maven-3.9.9\bin\mvn.cmd'
-$root = 'c:\Users\Singh\Desktop\fail2test'
+$root = 'C:\Users\Singh\Desktop\fail2test'
+
+Set-Location $root
 
 Write-Host "==========================================================================" -ForegroundColor Cyan
 Write-Host "                AFTERMATH FULL STACK ORCHESTRATOR                         " -ForegroundColor Cyan
@@ -13,7 +15,7 @@ Write-Host "====================================================================
 
 Write-Host "`n[1/4] Building Maven Monorepo..." -ForegroundColor Yellow
 $env:JAVA_HOME = 'C:\Program Files\Eclipse Adoptium\jdk-21.0.12.101-hotspot'
-& $mavenCmd clean package -DskipTests
+& $mavenCmd clean package -f "$root\pom.xml" -DskipTests
 
 if ($LASTEXITCODE -ne 0) {
     Write-Error "Maven build failed! Stopping orchestration."
@@ -22,13 +24,13 @@ if ($LASTEXITCODE -ne 0) {
 
 Write-Host "`n[2/4] Starting Services..." -ForegroundColor Yellow
 Write-Host "  - Starting Collector Service (Port 8090)..."
-$collector = Start-Process $javaExe -ArgumentList "-jar", "$root\aftermath-collector\target\aftermath-collector-0.1.0-SNAPSHOT.jar" -PassThru
+$collector = Start-Process $javaExe -ArgumentList "-jar", "$root\aftermath-collector\target\aftermath-collector-0.1.0-SNAPSHOT.jar" -WorkingDirectory $root -PassThru
 
 Write-Host "  - Starting Coupon Service (Port 8081)..."
-$coupon = Start-Process $javaExe -ArgumentList "-jar", "$root\sample-app\coupon-service\target\coupon-service-0.1.0-SNAPSHOT.jar" -PassThru
+$coupon = Start-Process $javaExe -ArgumentList "-jar", "$root\sample-app\coupon-service\target\coupon-service-0.1.0-SNAPSHOT.jar" -WorkingDirectory $root -PassThru
 
 Write-Host "  - Starting Payment Service (Port 8082)..."
-$payment = Start-Process $javaExe -ArgumentList "-jar", "$root\sample-app\payment-service\target\payment-service-0.1.0-SNAPSHOT.jar" -PassThru
+$payment = Start-Process $javaExe -ArgumentList "-jar", "$root\sample-app\payment-service\target\payment-service-0.1.0-SNAPSHOT.jar" -WorkingDirectory $root -PassThru
 
 Write-Host "`nWaiting 20 seconds for Java services to initialize..." -ForegroundColor Yellow
 Start-Sleep -Seconds 20
