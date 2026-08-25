@@ -1,0 +1,15 @@
+server:
+  port: ${PORT:8082}
+
+spring:
+  application:
+    name: payment-service
+
+coupon-service:
+  base-url: ${COUPON_SERVICE_BASE_URL:http://localhost:8081}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info

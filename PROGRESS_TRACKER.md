@@ -24,18 +24,18 @@
 
 ---
 
-## 3. Phase 0 — Foundation: Sample Application — ⏳ IN PROGRESS
+## 3. Phase 0 — Foundation: Sample Application — ✅ COMPLETED
 
-- **3.1 Create Coupon Service** — 📋 Pending
-- **3.2 Create Payment Service** — 📋 Pending
-- **3.3 Docker Compose for Sample App** — 📋 Pending
-- **3.4 Create Dockerfiles** — 📋 Pending
-- **3.5 End-to-End Verification** — 📋 Pending
-- **3.6 Phase 0 Checklist** — 📋 Pending
+- **3.1 Create Coupon Service** — ✅ Implemented Spring Boot Coupon Service (Port 8081) with intentional null discount for code `PREMIUM50`
+- **3.2 Create Payment Service** — ✅ Implemented Spring Boot Payment Service (Port 8082) with WebClient & `TraceIdFilter`
+- **3.3 Docker Compose for Sample App** — ✅ Configured multi-container orchestration in `sample-app/docker-compose.yml`
+- **3.4 Create Dockerfiles** — ✅ Created Alpine-based JRE 21 Dockerfiles for both services
+- **3.5 End-to-End Verification** — ✅ Verified: `SAVE10` returns HTTP 200, `PREMIUM50` triggers expected `NullPointerException` (HTTP 500)
+- **3.6 Phase 0 Checklist** — ✅ Verified all 6 checklist items
 
 ---
 
-## 4. Phase 1 — Capture SDK — 📋 PENDING
+## 4. Phase 1 — Capture SDK — ⏳ IN PROGRESS
 
 - **4.1 SDK Module Setup** — 📋 Pending
 - **4.2 SDK Package Structure** — 📋 Pending
