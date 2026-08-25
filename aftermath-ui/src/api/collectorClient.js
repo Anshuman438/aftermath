@@ -50,3 +50,26 @@ export async function triggerReplay(incidentId, targetBaseUrl = 'http://localhos
     throw err;
   }
 }
+
+export async function generateTest(incidentId, framework = 'JUNIT5_RESTASSURED') {
+  try {
+    const res = await fetch(`${API_BASE}/incidents/${incidentId}/generate-test`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        framework,
+        packageName: 'dev.aftermath.generated',
+        targetBaseUrl: 'http://localhost:8082'
+      }),
+    });
+    if (!res.ok) {
+      throw new Error(`HTTP error ${res.status}`);
+    }
+    return await res.json();
+  } catch (err) {
+    console.error(`Failed to generate test for incident ${incidentId}:`, err);
+    throw err;
+  }
+}

@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface TestArtifactRepository extends JpaRepository<TestArtifactEntity, Long> {
     Optional<TestArtifactEntity> findByArtifactId(String artifactId);
     List<TestArtifactEntity> findByIncidentId(String incidentId);
+    List<TestArtifactEntity> findByIncidentIdOrderByCreatedAtDesc(String incidentId);
 }

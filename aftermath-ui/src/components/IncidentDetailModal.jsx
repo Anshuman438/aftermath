@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { X, Copy, Check, Terminal, FileCode, Shield, Server, Clock, Play, RotateCcw, AlertTriangle, CheckCircle } from 'lucide-react';
-import { triggerReplay } from '../api/collectorClient';
+import { X, Copy, Check, Terminal, FileCode, Shield, Server, Clock, Play, RotateCcw, AlertTriangle, CheckCircle, Code, Download, Cpu } from 'lucide-react';
+import { triggerReplay, generateTest } from '../api/collectorClient';
 
 export default function IncidentDetailModal({ incident, onClose }) {
   const [copied, setCopied] = useState(false);
@@ -10,12 +10,37 @@ export default function IncidentDetailModal({ incident, onClose }) {
   const [replayError, setReplayError] = useState(null);
   const [targetUrl, setTargetUrl] = useState('http://localhost:8082');
 
+  const [generatingTest, setGeneratingTest] = useState(false);
+  const [generatedArtifact, setGeneratedArtifact] = useState(null);
+  const [testFramework, setTestFramework] = useState('JUNIT5_RESTASSURED');
+  const [testCopied, setTestCopied] = useState(false);
+
   if (!incident) return null;
 
   const handleCopyRaw = () => {
     navigator.clipboard.writeText(incident.rawJson || JSON.stringify(incident, null, 2));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCopyTestCode = () => {
+    if (generatedArtifact?.codeContent) {
+      navigator.clipboard.writeText(generatedArtifact.codeContent);
+      setTestCopied(true);
+      setTimeout(() => setTestCopied(false), 2000);
+    }
+  };
+
+  const handleDownloadTestFile = () => {
+    if (generatedArtifact?.codeContent && generatedArtifact?.fileName) {
+      const element = document.createElement('a');
+      const file = new Blob([generatedArtifact.codeContent], { type: 'text/plain' });
+      element.href = URL.createObjectURL(file);
+      element.download = generatedArtifact.fileName;
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    }
   };
 
   const handleRunReplay = async () => {
@@ -29,6 +54,19 @@ export default function IncidentDetailModal({ incident, onClose }) {
       setReplayError('Failed to execute replay against target service. Make sure target service is running.');
     } finally {
       setReplaying(false);
+    }
+  };
+
+  const handleGenerateTest = async () => {
+    setGeneratingTest(true);
+    try {
+      const artifact = await generateTest(incident.incidentId, testFramework);
+      setGeneratedArtifact(artifact);
+      setActiveTab('testgen');
+    } catch (err) {
+      console.error('Failed to generate test artifact', err);
+    } finally {
+      setGeneratingTest(false);
     }
   };
 
@@ -63,6 +101,15 @@ export default function IncidentDetailModal({ incident, onClose }) {
           </div>
           
           <div className="flex items-center space-x-2">
+            <button
+              onClick={handleGenerateTest}
+              disabled={generatingTest}
+              className="flex items-center space-x-1.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow-lg shadow-emerald-600/20"
+            >
+              {generatingTest ? <Cpu className="w-3.5 h-3.5 animate-spin" /> : <Code className="w-3.5 h-3.5" />}
+              <span>{generatingTest ? 'Generating...' : 'Generate JUnit Test'}</span>
+            </button>
+
             <button
               onClick={handleRunReplay}
               disabled={replaying}
@@ -117,6 +164,14 @@ export default function IncidentDetailModal({ incident, onClose }) {
               className={`py-3 flex items-center gap-2 border-b-2 transition ${activeTab === 'replay' ? 'border-indigo-500 text-indigo-400 font-semibold' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
             >
               <RotateCcw className="w-3.5 h-3.5 text-rose-400" /> Replay Results
+            </button>
+          )}
+          {generatedArtifact && (
+            <button
+              onClick={() => setActiveTab('testgen')}
+              className={`py-3 flex items-center gap-2 border-b-2 transition ${activeTab === 'testgen' ? 'border-emerald-500 text-emerald-400 font-semibold' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
+            >
+              <Code className="w-3.5 h-3.5 text-emerald-400" /> Generated Test Code
             </button>
           )}
           <button
@@ -221,6 +276,42 @@ export default function IncidentDetailModal({ incident, onClose }) {
             </div>
           )}
 
+          {activeTab === 'testgen' && generatedArtifact && (
+            <div className="space-y-3 relative">
+              <div className="flex items-center justify-between bg-slate-950 p-3 rounded-xl border border-slate-800">
+                <div className="flex items-center space-x-3">
+                  <span className="bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold px-2 py-0.5 rounded border border-emerald-500/30">
+                    {generatedArtifact.fileName}
+                  </span>
+                  <span className="text-xs text-slate-400">Framework: <strong className="text-slate-200">{generatedArtifact.framework}</strong></span>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={handleCopyTestCode}
+                    className="bg-slate-800 hover:bg-slate-700 text-xs px-2.5 py-1 rounded text-slate-300 flex items-center gap-1 transition"
+                  >
+                    {testCopied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    {testCopied ? 'Copied' : 'Copy Code'}
+                  </button>
+                  <button
+                    onClick={handleDownloadTestFile}
+                    className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-2.5 py-1 rounded flex items-center gap-1 transition font-semibold"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    Download .java
+                  </button>
+                </div>
+              </div>
+
+              <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 overflow-x-auto">
+                <pre className="text-emerald-300 leading-relaxed whitespace-pre-wrap">
+                  {generatedArtifact.codeContent}
+                </pre>
+              </div>
+            </div>
+          )}
+
           {activeTab === 'raw' && (
             <div className="relative bg-slate-950 p-4 rounded-xl border border-slate-800 overflow-x-auto">
               <button
@@ -239,14 +330,19 @@ export default function IncidentDetailModal({ incident, onClose }) {
 
         {/* Footer */}
         <div className="p-4 border-t border-slate-800 bg-slate-900/50 flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <span className="text-[11px] text-slate-400">Target Base URL:</span>
-            <input
-              type="text"
-              value={targetUrl}
-              onChange={(e) => setTargetUrl(e.target.value)}
-              className="bg-slate-950 border border-slate-800 rounded px-2.5 py-1 text-xs text-slate-200 font-mono focus:outline-none focus:border-indigo-500"
-            />
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <span className="text-[11px] text-slate-400">Framework:</span>
+              <select
+                value={testFramework}
+                onChange={(e) => setTestFramework(e.target.value)}
+                className="bg-slate-950 border border-slate-800 rounded px-2.5 py-1 text-xs text-slate-200 font-mono focus:outline-none focus:border-indigo-500"
+              >
+                <option value="JUNIT5_RESTASSURED">JUnit 5 + REST-Assured</option>
+                <option value="JUNIT5_MOCKMVC">JUnit 5 + MockMvc</option>
+                <option value="JUNIT5_WEBTESTCLIENT">JUnit 5 + WebTestClient</option>
+              </select>
+            </div>
           </div>
 
           <button

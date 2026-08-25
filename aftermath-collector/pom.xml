@@ -24,6 +24,13 @@
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
 
+        <!-- aftermath-testgen module -->
+        <dependency>
+            <groupId>dev.aftermath</groupId>
+            <artifactId>aftermath-testgen</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- Spring Boot Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

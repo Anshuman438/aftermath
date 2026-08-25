@@ -3,8 +3,6 @@ package dev.aftermath.collector.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "test_artifacts")
 @Data
@@ -23,19 +21,13 @@ public class TestArtifactEntity {
     @Column(nullable = false)
     private String incidentId;
 
-    private String testType; // JUNIT5, REST_ASSURED, CURL, POSTMAN
-
+    private String framework;
+    private String packageName;
+    private String className;
     private String fileName;
 
     @Column(length = 50000)
-    private String content;
+    private String codeContent;
 
-    private LocalDateTime createdAt;
-
-    @PrePersist
-    public void prePersist() {
-        if (createdAt == null) {
-            createdAt = LocalDateTime.now();
-        }
-    }
+    private String createdAt;
 }

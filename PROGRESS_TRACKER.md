@@ -78,14 +78,20 @@
 
 ---
 
-## 8. Phase 5 — Test Generator — ⏳ IN PROGRESS
+## 8. Phase 5 — Test Generator — ✅ COMPLETED
 
-- **8.1 TestGen Module Setup** — 📋 Pending
-- **8.2 JUnit 5 Test Generator** — 📋 Pending
+- **8.1 TestGen Module Setup** — ✅ Built `aftermath-testgen` module supporting REST-Assured, Spring MockMvc, and Spring WebTestClient templates
+- **8.2 JUnit 5 Test Generator** — ✅ Implemented `JUnitTestGenerator` generating standalone, production-ready `.java` test files from captured incident capsules
+- **8.3 Collector TestGen API** — ✅ Integrated `TestGenService` and `TestGenController` (`POST /api/v1/incidents/{incidentId}/generate-test`, `GET /api/v1/incidents/{incidentId}/test-artifacts`)
+- **8.4 UI Code Generator & Download** — ✅ Added "Generate JUnit Test" button, framework selector, copy code, and `.java` file download button in `aftermath-ui`
+- **8.5 End-to-End TestGen Test** — ✅ Verified Test Generator outputs clean, compilable JUnit 5 + REST-Assured test code asserting HTTP 500 failure status
 
 ---
 
-## 9. Phase 6 — CLI Tool — 📋 PENDING
+## 9. Phase 6 — CLI Tool — ⏳ IN PROGRESS
+
+- **9.1 CLI Module Setup** — 📋 Pending
+- **9.2 CLI Commands** — 📋 Pending
 
 ---
 
