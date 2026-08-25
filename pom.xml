@@ -15,10 +15,10 @@
 
     <modules>
         <module>aftermath-sdk</module>
-        <module>aftermath-collector</module>
         <module>aftermath-replay</module>
-        <module>aftermath-testgen</module>
-        <module>aftermath-cli</module>
+        <module>aftermath-collector</module>
+        <module>sample-app/coupon-service</module>
+        <module>sample-app/payment-service</module>
     </modules>
 
     <properties>

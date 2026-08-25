@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface ReplayJobRepository extends JpaRepository<ReplayJobEntity, Long> {
     Optional<ReplayJobEntity> findByJobId(String jobId);
     List<ReplayJobEntity> findByIncidentId(String incidentId);
+    List<ReplayJobEntity> findByIncidentIdOrderByCreatedAtDesc(String incidentId);
 }

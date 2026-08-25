@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface EvidenceRepository extends JpaRepository<EvidenceEntity, Long> {
     List<EvidenceEntity> findByIncidentId(String incidentId);
+    List<EvidenceEntity> findByIncidentIdAndType(String incidentId, String type);
 }

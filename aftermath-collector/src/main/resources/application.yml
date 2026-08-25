@@ -5,19 +5,16 @@ spring:
   application:
     name: aftermath-collector
   datasource:
-    url: jdbc:sqlite:aftermath.db
-    driver-class-name: org.sqlite.JDBC
+    url: jdbc:h2:file:./aftermath_collector_db;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
   jpa:
-    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
     show-sql: false
-    properties:
-      hibernate:
-        format_sql: true
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health, info
+aftermath:
+  sdk:
+    enabled: false

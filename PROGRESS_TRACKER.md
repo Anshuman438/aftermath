@@ -68,14 +68,20 @@
 
 ---
 
-## 7. Phase 4 — Replay Engine — ⏳ IN PROGRESS
+## 7. Phase 4 — Replay Engine — ✅ COMPLETED
 
-- **7.1 Replay Module Setup** — 📋 Pending
-- **7.2 Replay Executor** — 📋 Pending
+- **7.1 Replay Module Setup** — ✅ Built `aftermath-replay` module with Java 11 `HttpClient` and header sanitization
+- **7.2 Replay Executor** — ✅ Implemented `ReplayExecutor` (re-executes captured HTTP requests against target service endpoints and compares expected vs actual status/response)
+- **7.3 Collector Replay API** — ✅ Integrated `ReplayService` and `ReplayController` (`POST /api/v1/incidents/{incidentId}/replay`, `GET /api/v1/incidents/{incidentId}/replays`, `GET /api/v1/replays/{jobId}`)
+- **7.4 UI Live Replay Integration** — ✅ Added "Replay Incident" button & Replay Results tab to `aftermath-ui`
+- **7.5 End-to-End Replay Test** — ✅ Verified Replay Engine re-executes incident payload against `payment-service` (122ms execution time) and returns `reproduced: true`
 
 ---
 
-## 8. Phase 5 — Test Generator — 📋 PENDING
+## 8. Phase 5 — Test Generator — ⏳ IN PROGRESS
+
+- **8.1 TestGen Module Setup** — 📋 Pending
+- **8.2 JUnit 5 Test Generator** — 📋 Pending
 
 ---
 

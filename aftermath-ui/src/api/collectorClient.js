@@ -31,3 +31,22 @@ export async function fetchIncidentById(incidentId) {
     throw err;
   }
 }
+
+export async function triggerReplay(incidentId, targetBaseUrl = 'http://localhost:8082') {
+  try {
+    const res = await fetch(`${API_BASE}/incidents/${incidentId}/replay`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ targetBaseUrl }),
+    });
+    if (!res.ok) {
+      throw new Error(`HTTP error ${res.status}`);
+    }
+    return await res.json();
+  } catch (err) {
+    console.error(`Failed to trigger replay for incident ${incidentId}:`, err);
+    throw err;
+  }
+}

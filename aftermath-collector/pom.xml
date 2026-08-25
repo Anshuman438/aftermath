@@ -17,6 +17,13 @@
     <description>Collector backend service for storing and managing incident capsules</description>
 
     <dependencies>
+        <!-- aftermath-replay module -->
+        <dependency>
+            <groupId>dev.aftermath</groupId>
+            <artifactId>aftermath-replay</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- Spring Boot Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -53,6 +60,7 @@
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-community-dialects</artifactId>
+            <version>6.5.2.Final</version>
         </dependency>
 
         <!-- Lombok -->
