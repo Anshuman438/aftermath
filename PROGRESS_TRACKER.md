@@ -132,7 +132,7 @@
 
 ---
 
-## 14. 100% Market Complete Release (v2.0.0 - v4.0.0) — ✅ COMPLETED
+## 14. Enterprise Level Upgrades (v2.0.0 - v5.0.0) — ✅ COMPLETED
 
 - **14.1 WireMock Auto-Mocking Test Generator (`JUNIT5_WIREMOCK`)** — ✅ Generates standalone WireMock server stubs in `.java` test files for zero-dependency CI/CD execution without running real external microservices.
 - **14.2 Non-HTTP Background & Async Interceptor (`AftermathAspectInterceptor`)** — ✅ Spring `@Aspect` catching uncaught failures in background `@Scheduled` cron jobs and `@Async` thread executions.
@@ -140,14 +140,16 @@
 - **14.4 1-Click Global Installers (`install.ps1` & `install.sh`)** — ✅ 1-Click shell & PowerShell installation scripts packaging `aftermath-cli` into user system PATH.
 - **14.5 GitHub Action CI/CD Integration (`aftermath-action`)** — ✅ Composite GitHub Action (`action.yml`) verifying Pull Requests against captured reproduction tests.
 - **14.6 OpenTelemetry Distributed Trace Propagation (`OpenTelemetryTraceInterceptor`)** — ✅ Extracts W3C `traceparent`, B3, Datadog, and MDC trace IDs across distributed microservice calls.
-- **14.7 VS Code Extension Prototype (`aftermath-vscode`)** — ✅ VS Code extension manifest and extension activation script.
+- **14.7 VS Code & JetBrains IntelliJ IDE Plugin Manifests (`aftermath-vscode`, `deploy/ide/intellij`)** — ✅ IDE manifests for marketplace distribution.
 - **14.8 Polyglot SDK Ecosystem (Java, JS, TS, Python, Go, Rust, C#, PHP, Ruby)** — ✅ Production-grade SDK modules for 7 major language ecosystems.
 - **14.9 Cascading Error Chain Root Cause Engine (`CascadingErrorAnalyzer`)** — ✅ Isolates the primary root cause culprit line during cascading microservice failures.
+- **14.10 Multi-Tenant SaaS Security & Auth (`AuthController`, `JwtTokenProvider`, `OrganizationEntity`)** — ✅ Built multi-tenant organization registration, user authentication, and JWT token management.
+- **14.11 Kubernetes Helm Deployment Charts (`deploy/helm/aftermath`)** — ✅ Automated Helm v2 chart (`Chart.yaml`, `values.yaml`) for high-scale Kubernetes deployments.
 
 ---
 
-## 15. 100% Total Completion Ultimate Master Release (v5.0.0) — ✅ COMPLETED
+## 15. Tiered Data Retention & Cold Compliance Archive Engine (v6.0.0) — ✅ COMPLETED
 
-- **15.1 Cloud Multi-Tenant SaaS Security & JWT Auth (`AuthController`, `JwtTokenProvider`, `OrganizationEntity`)** — ✅ Built multi-tenant organization registration, user authentication, and JWT token management.
-- **15.2 Kubernetes Helm Deployment Charts (`deploy/helm/aftermath`)** — ✅ Automated Helm v2 chart (`Chart.yaml`, `values.yaml`) for deploying AFTERMATH Collector and Kafka brokers on Kubernetes clusters.
-- **15.3 JetBrains IntelliJ Marketplace Publishing Manifest (`deploy/ide/intellij/plugin.xml`)** — ✅ JetBrains plugin manifest for IDE marketplace distribution.
+- **15.1 Auto-Pruning TTL Retention Service (`DataRetentionService`)** — ✅ Daily `@Scheduled` cron task automatically purging raw incident capsules older than 30 days while **strictly preserving all generated test artifacts (`TestArtifactEntity`) permanently**.
+- **15.2 Cold Compliance GZIP Archive Exporter (`S3ArchiveExporter`)** — ✅ Generates compressed `.json.gz` compliance archives for long-term 7-year cold storage in AWS S3 / GCS buckets.
+- **15.3 Data Retention REST Endpoints** — ✅ Exposed `/api/v1/retention/purge` and `/api/v1/retention/archive-gzip`.
