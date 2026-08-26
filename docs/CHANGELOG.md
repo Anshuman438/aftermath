@@ -4,19 +4,23 @@ All notable changes to the AFTERMATH platform will be documented in this file.
 
 ---
 
-## [v3.0.0] - 2026-08-26
+## [v3.2.0] - 2026-08-26
 
-### 🚀 Polyglot & Automation Engine Release
+### 🚀 Polyglot Expansion & Cascading Error Root Cause Engine
+- **Cascading Error Chain Root Cause Engine (`CascadingErrorAnalyzer`)**:
+  - Automatically unwraps nested `Throwable` cause chains (`Caused by:...`) to isolate the **Primary Root Cause Culprit** (the first domino that fell) during cascading failures across microservices.
+  - Exposed via REST endpoint `GET /api/v1/incidents/{incidentId}/cascading-analysis`.
+- **Polyglot Python SDK (`aftermath-sdk-python`)**:
+  - Built Python package module (`aftermath`) for FastAPI, Flask, and Django exception interception, PII redaction, and non-blocking background transport.
 - **Polyglot Node.js / Express SDK (`aftermath-sdk-node`)**:
-  - NPM package module providing Express error interceptor middleware (`aftermathExpressMiddleware`).
-  - Automatic JS PII & Bearer token redactor.
-  - Fail-open non-blocking HTTP event transport.
-- **Automated Git PR Bot Payload Generator (`GitPrBotService`)**:
-  - Automatically generates branch names (`aftermath/fix-incident-xxx`), pull request title, rich markdown description, generated test code, and recommended code fix diff.
-- **OpenAPI / Pact Contract Test Generator (`ContractTestGenerator`)**:
-  - Generates REST-Assured JSON schema contract validation tests ensuring API contract compliance when schema drift occurs.
-- **Automation REST Controller (`AutomationController`)**:
-  - Exposed `/api/v1/incidents/{id}/git-pr-payload` and `/api/v1/incidents/{id}/contract-test`.
+  - Express error interceptor middleware (`aftermathExpressMiddleware`) with PII redaction.
+
+---
+
+## [v3.1.0] - 2026-08-26
+
+### 🧹 Architecture Refactoring & Cleanup
+- Enforced AFTERMATH Default local-first architecture (removed automatic Git PR pushing code to maintain zero-fuss developer experience).
 
 ---
 

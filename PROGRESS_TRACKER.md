@@ -17,7 +17,7 @@
 ## 2. Project Structure & Repository — ✅ COMPLETED
 
 - **2.1 Initialize Git Repository** — ✅ Repository initialized
-- **2.2 Create Monorepo Structure** — ✅ Created submodules (`aftermath-sdk`, `aftermath-sdk-node`, `aftermath-collector`, `aftermath-ui`, `aftermath-replay`, `aftermath-testgen`, `aftermath-cli`, `sample-app`, `docs`, `aftermath-action`, `aftermath-vscode`)
+- **2.2 Create Monorepo Structure** — ✅ Created submodules (`aftermath-sdk`, `aftermath-sdk-node`, `aftermath-sdk-python`, `aftermath-collector`, `aftermath-ui`, `aftermath-replay`, `aftermath-testgen`, `aftermath-cli`, `sample-app`, `docs`, `aftermath-action`, `aftermath-vscode`)
 - **2.3 Create Parent POM** — ✅ Created parent `pom.xml` with Java 21 & Spring Boot 3.3.0 dependencies
 - **2.4 Create .gitignore** — ✅ Added standard Java/Node/SQLite/Docker ignore patterns
 - **2.5 Initial Commit** — ✅ Committed initial repository state (`3108ecc`)
@@ -144,9 +144,9 @@
 
 ---
 
-## 15. Enterprise Polyglot & Automated PR Engine (v3.0.0) — ✅ COMPLETED
+## 15. Enterprise Polyglot & Cascading Error Root Cause Engine (v3.2.0) — ✅ COMPLETED
 
-- **15.1 Polyglot Node.js / Express SDK (`aftermath-sdk-node`)** — ✅ Created npm package module for Express error interceptor, PII redactor, and async transport.
-- **15.2 Automated Git PR Bot Payload Generator (`GitPrBotService`)** — ✅ Automatically generates Git branch name, PR markdown body, generated test code, and recommended code diff.
-- **15.3 OpenAPI / Pact Contract Test Generator (`ContractTestGenerator`)** — ✅ Generates JSON schema contract validation tests when API schema drift occurs.
-- **15.4 Automation Controller Endpoints (`AutomationController`)** — ✅ Exposed `/api/v1/incidents/{id}/git-pr-payload` and `/api/v1/incidents/{id}/contract-test`.
+- **15.1 Cascading Error Chain Root Cause Engine (`CascadingErrorAnalyzer`)** — ✅ Unwraps nested `Throwable` cause chains to isolate the **Primary Root Cause Culprit** (the first domino that fell) during cascading microservice failures.
+- **15.2 Polyglot Node.js / Express SDK (`aftermath-sdk-node`)** — ✅ NPM SDK module for Express error interceptor, JS PII redactor, and async transport.
+- **15.3 Polyglot Python SDK (`aftermath-sdk-python`)** — ✅ Python package module (`aftermath`) for FastAPI, Flask, and Django exception interception.
+- **15.4 Cascading Analysis Endpoint** — ✅ Exposed `/api/v1/incidents/{incidentId}/cascading-analysis`.
