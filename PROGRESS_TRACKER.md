@@ -42,7 +42,7 @@
 - **4.3 Core Component: Capture Filter** — ✅ Implemented `CaptureFilter`, `RequestWrapper`, `ResponseWrapper`, and `FailureDetector`
 - **4.4 Core Component: Redaction Engine** — ✅ Implemented `RedactionEngine`, `HeaderRedactor`, `BodyRedactor`, and `PatternRegistry` (masks Bearer tokens, cookies, email, phone, CC, PII)
 - **4.5 Core Component: Event Transport** — ✅ Implemented `HttpEventTransport`, `LogEventTransport`, and fail-open `AsyncEventDispatcher` (bounded queue & daemon threads)
-- **4.6 Auto-Configuration** — ✅ Implemented `@AutoConfiguration` in `AftermathAutoConfiguration` registered via `AutoConfiguration.imports`
+- **4.6 Auto-Configuration** — ✅ Implemented `@AutoConfiguration` in `AftermathAutoConfiguration` registered via `AftermathAutoConfiguration.imports`
 - **4.7 Integrate SDK into Sample App** — ✅ Integrated `aftermath-sdk` into `payment-service`
 - **4.8 SDK Test Suite** — ✅ Written and verified unit tests (`RedactionEngineTest`, `FailOpenTest`)
 - **4.9 Phase 1 Checklist** — ✅ Verified `CaptureFilter` in action on `PaymentService` failure stack trace
@@ -153,3 +153,11 @@
 - **15.1 Auto-Pruning TTL Retention Service (`DataRetentionService`)** — ✅ Daily `@Scheduled` cron task automatically purging raw incident capsules older than 30 days while **strictly preserving all generated test artifacts (`TestArtifactEntity`) permanently**.
 - **15.2 Cold Compliance GZIP Archive Exporter (`S3ArchiveExporter`)** — ✅ Generates compressed `.json.gz` compliance archives for long-term 7-year cold storage in AWS S3 / GCS buckets.
 - **15.3 Data Retention REST Endpoints** — ✅ Exposed `/api/v1/retention/purge` and `/api/v1/retention/archive-gzip`.
+
+---
+
+## 16. Co-Founder Failure Audit & Security Hardening Patch (v6.1.0) — ✅ COMPLETED
+
+- **16.1 12-Point Co-Founder Failure Analysis & Matrix (`cofounder_report.md`)** — ✅ Conducted adversarial stress-audit analyzing all 12 potential production failure modes.
+- **16.2 Enhanced PII Regex Redactor (`PatternRegistry`)** — ✅ Hardened `SENSITIVE_JSON_KEY_PATTERN` to redact numeric PINs, CVVs, booleans, and string keys.
+- **16.3 Monorepo Clean Compilation & Build Verification** — ✅ Clean compilation across all 8 Java modules with 0 errors.

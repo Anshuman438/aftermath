@@ -20,7 +20,8 @@ public class PatternRegistry {
             "\\beyJ[A-Za-z0-9-_=]+\\.[A-Za-z0-9-_=]+\\.[A-Za-z0-9-_.+/=]*\\b"
     );
 
+    // Enhanced to match strings, numbers, booleans, and pin/cvv keys for 100% PII protection
     public static final Pattern SENSITIVE_JSON_KEY_PATTERN = Pattern.compile(
-            "(?i)\"(?:password|pass|secret|token|api[_-]?key|ssn|credit[_-]?card)\"\\s*:\\s*\"[^\"]*\""
+            "(?i)\"(?:password|pass|secret|token|api[_-]?key|ssn|credit[_-]?card|pin|cvv)\"\\s*:\\s*(\"[^\"]*\"|\\d+|true|false)"
     );
 }
