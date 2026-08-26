@@ -117,3 +117,15 @@
 - **12.2 SHA-256 Incident Deduplication Engine** — ✅ SHA-256 stack trace fingerprinting & occurrence counter badge (`2x`, `3x`)
 - **12.3 cURL Command Exporter (`aftermath curl`)** — ✅ Exports captured request capsules as runnable bash/powershell cURL scripts
 - **12.4 AI-Powered Root Cause Analysis (`aftermath analyze`)** — ✅ Automated stack trace parsing, failing line identification, fix recommendations, and suggested Git code diffs
+
+---
+
+## 13. Critical Security & Reliability Audit — ✅ COMPLETED
+
+- **13.1 BUG-001 (XXE Injection Prevention)** — ✅ Fixed in `PomXmlInjector` and `ProjectDetector` by disabling DTDs and external entities
+- **13.2 BUG-002 (SSRF Target URL Validation)** — ✅ Fixed in `ReplayExecutor` by blocking forbidden cloud metadata hosts and enforcing valid HTTP/HTTPS schemes
+- **13.3 BUG-003 (DTO & Endpoint Input Validation)** — ✅ Fixed in `CreateIncidentRequest` and `IncidentController` by adding `@Valid`, `@NotBlank`, and `@Size` constraints
+- **13.4 BUG-004 (H2 DB Security Hardening)** — ✅ Fixed in `application.yml` by disabling H2 Console and setting strong connection passwords
+- **13.5 BUG-005 (Thread Safety in Event Dispatcher)** — ✅ Fixed in `AsyncEventDispatcher` using `AtomicInteger`
+- **13.6 BUG-007 (Stack Trace Database Capacity)** — ✅ Fixed in `IncidentEntity` expanding `stackTrace` and `rawJson` to 65,535 chars
+- **13.7 BUG-009 (Global Exception Handling)** — ✅ Implemented `GlobalExceptionHandler` with structured JSON error responses

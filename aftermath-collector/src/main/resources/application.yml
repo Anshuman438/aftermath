@@ -4,11 +4,14 @@ server:
 spring:
   application:
     name: aftermath-collector
+  h2:
+    console:
+      enabled: false # Fix BUG-004: Explicitly disable web console in production
   datasource:
     url: jdbc:h2:file:./aftermath_collector_db;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE
     driver-class-name: org.h2.Driver
     username: sa
-    password:
+    password: AftermathSecurePass2026! # Fix BUG-004: Secure database credentials
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:

@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AsyncEventDispatcher implements EventTransport {
 
@@ -19,10 +20,12 @@ public class AsyncEventDispatcher implements EventTransport {
         this.executor = new ThreadPoolExecutor(
                 2, 4, 60L, TimeUnit.SECONDS, queue,
                 new ThreadFactory() {
-                    private int count = 0;
+                    // Fix BUG-005: Use AtomicInteger for thread safety in ThreadFactory
+                    private final AtomicInteger count = new AtomicInteger(0);
+
                     @Override
                     public Thread newThread(Runnable r) {
-                        Thread t = new Thread(r, "aftermath-dispatcher-" + (++count));
+                        Thread t = new Thread(r, "aftermath-dispatcher-" + count.incrementAndGet());
                         t.setDaemon(true);
                         return t;
                     }

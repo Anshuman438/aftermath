@@ -4,6 +4,7 @@ import dev.aftermath.collector.dto.CreateIncidentRequest;
 import dev.aftermath.collector.dto.IncidentListResponse;
 import dev.aftermath.collector.dto.IncidentResponse;
 import dev.aftermath.collector.service.IncidentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class IncidentController {
     private final IncidentService incidentService;
 
     @PostMapping
-    public ResponseEntity<IncidentResponse> createIncident(@RequestBody CreateIncidentRequest request) {
+    public ResponseEntity<IncidentResponse> createIncident(@Valid @RequestBody CreateIncidentRequest request) {
         IncidentResponse response = incidentService.saveIncident(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -27,7 +28,8 @@ public class IncidentController {
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "20") int size,
             @RequestParam(name = "search", required = false) String search) {
-        IncidentListResponse response = incidentService.getIncidents(page, size, search);
+        int cappedSize = Math.min(Math.max(1, size), 100);
+        IncidentListResponse response = incidentService.getIncidents(page, cappedSize, search);
         return ResponseEntity.ok(response);
     }
 

@@ -27,18 +27,22 @@ public class IncidentEntity {
     private String commitHash;
 
     private String httpMethod;
+
+    @Column(length = 2048)
     private String requestUri;
+
     private Integer statusCode;
 
     private String exceptionClass;
 
-    @Column(length = 2000)
+    @Column(length = 4096)
     private String exceptionMessage;
 
-    @Column(length = 10000)
+    // Fix BUG-007: Expand stackTrace column to 65535 characters to prevent truncation
+    @Column(length = 65535)
     private String stackTrace;
 
-    @Column(length = 50000)
+    @Column(length = 65535)
     private String rawJson;
 
     private String fingerprint;

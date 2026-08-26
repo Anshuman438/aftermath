@@ -26,6 +26,10 @@ public class ReplayExecutor {
             "origin", "proxy-authorization", "via", "upgrade"
     );
 
+    private static final Set<String> BLOCKED_HOSTS = Set.of(
+            "169.254.169.254", "metadata.google.internal", "metadata.internal"
+    );
+
     private final HttpClient httpClient;
 
     public ReplayExecutor() {
@@ -51,6 +55,24 @@ public class ReplayExecutor {
         }
         if (baseUrl.endsWith("/")) {
             baseUrl = baseUrl.substring(0, baseUrl.length() - 1);
+        }
+
+        // Fix BUG-002: SSRF Vulnerability Prevention
+        String ssrfValidationError = validateTargetUrl(baseUrl);
+        if (ssrfValidationError != null) {
+            log.warn("SSRF validation blocked replay to {}: {}", baseUrl, ssrfValidationError);
+            return ReplayResult.builder()
+                    .jobId(jobId)
+                    .incidentId(incident.getIncidentId())
+                    .targetBaseUrl(baseUrl)
+                    .reproduced(false)
+                    .originalStatusCode(expectedStatus)
+                    .replayedStatusCode(0)
+                    .statusMatch(false)
+                    .errorMessage("SSRF Protection Block: " + ssrfValidationError)
+                    .executionTimeMs(0)
+                    .timestamp(timestamp)
+                    .build();
         }
 
         String uriPath = reqSnapshot != null ? reqSnapshot.getUri() : "/";
@@ -84,7 +106,7 @@ public class ReplayExecutor {
             for (Map.Entry<String, String> entry : headersToSet.entrySet()) {
                 String k = entry.getKey();
                 String v = entry.getValue();
-                if (k != null && v != null && !RESTRICTED_HEADERS.contains(k.toLowerCase()) && !v.equals("[REDACTED]")) {
+                if (k != null && v != null && !RESTRICTED_HEADERS.contains(k.toLowerCase()) && !v.toLowerCase().contains("redacted")) {
                     try {
                         String sanitizedVal = v.replaceAll("[\\r\\n]", "").trim();
                         httpReqBuilder.header(k, sanitizedVal);
@@ -144,6 +166,29 @@ public class ReplayExecutor {
                     .executionTimeMs(elapsed)
                     .timestamp(timestamp)
                     .build();
+        }
+    }
+
+    private String validateTargetUrl(String url) {
+        try {
+            URI uri = URI.create(url);
+            String scheme = uri.getScheme();
+            if (scheme == null || (!scheme.equalsIgnoreCase("http") && !scheme.equalsIgnoreCase("https"))) {
+                return "Invalid URL scheme. Only HTTP and HTTPS are permitted.";
+            }
+
+            String host = uri.getHost();
+            if (host == null || host.isBlank()) {
+                return "Invalid URL host.";
+            }
+
+            if (BLOCKED_HOSTS.contains(host.toLowerCase())) {
+                return "Forbidden target host: Cloud metadata services are blocked.";
+            }
+
+            return null; // Valid
+        } catch (Exception e) {
+            return "Invalid target URL syntax: " + e.getMessage();
         }
     }
 }
