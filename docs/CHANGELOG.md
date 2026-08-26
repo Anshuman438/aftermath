@@ -4,16 +4,32 @@ All notable changes to the AFTERMATH platform will be documented in this file.
 
 ---
 
+## [v3.0.0] - 2026-08-26
+
+### 🚀 Polyglot & Automation Engine Release
+- **Polyglot Node.js / Express SDK (`aftermath-sdk-node`)**:
+  - NPM package module providing Express error interceptor middleware (`aftermathExpressMiddleware`).
+  - Automatic JS PII & Bearer token redactor.
+  - Fail-open non-blocking HTTP event transport.
+- **Automated Git PR Bot Payload Generator (`GitPrBotService`)**:
+  - Automatically generates branch names (`aftermath/fix-incident-xxx`), pull request title, rich markdown description, generated test code, and recommended code fix diff.
+- **OpenAPI / Pact Contract Test Generator (`ContractTestGenerator`)**:
+  - Generates REST-Assured JSON schema contract validation tests ensuring API contract compliance when schema drift occurs.
+- **Automation REST Controller (`AutomationController`)**:
+  - Exposed `/api/v1/incidents/{id}/git-pr-payload` and `/api/v1/incidents/{id}/contract-test`.
+
+---
+
 ## [v2.0.0] - 2026-08-26
 
 ### 🎉 100% Market Mastery & Enterprise Release
-- **1-Click System Installers (`install.ps1` & `install.sh`)**: Global installation scripts for Windows PowerShell and Linux/macOS bash adding `aftermath` CLI to user PATH.
-- **GitHub Action Integration (`aftermath-action`)**: GitHub Composite Action (`action.yml`) to automatically verify Pull Requests against captured reproduction tests.
-- **OpenTelemetry Distributed Trace Context Propagation (`OpenTelemetryTraceInterceptor`)**: Extracts W3C `traceparent`, B3, Datadog `x-datadog-trace-id`, and SLF4J MDC trace context across microservices.
-- **VS Code Extension Prototype (`aftermath-vscode`)**: VS Code extension manifest (`package.json`) and `extension.js` providing inline incident fetching and project attachment.
-- **WireMock Auto-Mocking Test Generator (`JUNIT5_WIREMOCK`)**: Generates standalone WireMock stubs in `.java` test files for zero-dependency CI/CD execution.
-- **Non-HTTP Background & Async Interceptor (`AftermathAspectInterceptor`)**: Spring `@Aspect` catching uncaught failures in `@Scheduled` and `@Async` tasks.
-- **JVM System Context Snapshot (`SystemSnapshot`)**: Captures free memory, max memory, thread count, and CPU load at failure time.
+- **1-Click System Installers (`install.ps1` & `install.sh`)**
+- **GitHub Action Integration (`aftermath-action`)**
+- **OpenTelemetry Distributed Trace Context Propagation (`OpenTelemetryTraceInterceptor`)**
+- **VS Code Extension Prototype (`aftermath-vscode`)**
+- **WireMock Auto-Mocking Test Generator (`JUNIT5_WIREMOCK`)**
+- **Non-HTTP Background & Async Interceptor (`AftermathAspectInterceptor`)**
+- **JVM System Context Snapshot (`SystemSnapshot`)**
 
 ---
 
