@@ -17,7 +17,7 @@
 ## 2. Project Structure & Repository — ✅ COMPLETED
 
 - **2.1 Initialize Git Repository** — ✅ Repository initialized
-- **2.2 Create Monorepo Structure** — ✅ Created submodules (`aftermath-sdk`, `aftermath-collector`, `aftermath-ui`, `aftermath-replay`, `aftermath-testgen`, `aftermath-cli`, `sample-app`, `docs`)
+- **2.2 Create Monorepo Structure** — ✅ Created submodules (`aftermath-sdk`, `aftermath-collector`, `aftermath-ui`, `aftermath-replay`, `aftermath-testgen`, `aftermath-cli`, `sample-app`, `docs`, `aftermath-action`, `aftermath-vscode`)
 - **2.3 Create Parent POM** — ✅ Created parent `pom.xml` with Java 21 & Spring Boot 3.3.0 dependencies
 - **2.4 Create .gitignore** — ✅ Added standard Java/Node/SQLite/Docker ignore patterns
 - **2.5 Initial Commit** — ✅ Committed initial repository state (`3108ecc`)
@@ -38,7 +38,7 @@
 ## 4. Phase 1 — Capture SDK — ✅ COMPLETED
 
 - **4.1 SDK Module Setup** — ✅ Built `aftermath-sdk` JAR module with Spring Boot 3.3.0 & Jackson dependencies
-- **4.2 SDK Package Structure** — ✅ Created model (`IncidentEvent`, `RequestSnapshot`, `ErrorSnapshot`, `DeploymentInfo`), capture, redaction, transport, and context packages
+- **4.2 SDK Package Structure** — ✅ Created model (`IncidentEvent`, `RequestSnapshot`, `ErrorSnapshot`, `DeploymentInfo`, `SystemSnapshot`), capture, redaction, transport, and context packages
 - **4.3 Core Component: Capture Filter** — ✅ Implemented `CaptureFilter`, `RequestWrapper`, `ResponseWrapper`, and `FailureDetector`
 - **4.4 Core Component: Redaction Engine** — ✅ Implemented `RedactionEngine`, `HeaderRedactor`, `BodyRedactor`, and `PatternRegistry` (masks Bearer tokens, cookies, email, phone, CC, PII)
 - **4.5 Core Component: Event Transport** — ✅ Implemented `HttpEventTransport`, `LogEventTransport`, and fail-open `AsyncEventDispatcher` (bounded queue & daemon threads)
@@ -80,7 +80,7 @@
 
 ## 8. Phase 5 — Test Generator — ✅ COMPLETED
 
-- **8.1 TestGen Module Setup** — ✅ Built `aftermath-testgen` module supporting REST-Assured, Spring MockMvc, and Spring WebTestClient templates
+- **8.1 TestGen Module Setup** — ✅ Built `aftermath-testgen` module supporting REST-Assured, Spring MockMvc, Spring WebTestClient, and WireMock templates
 - **8.2 JUnit 5 Test Generator** — ✅ Implemented `JUnitTestGenerator` generating standalone, production-ready `.java` test files from captured incident capsules
 - **8.3 Collector TestGen API** — ✅ Integrated `TestGenService` and `TestGenController` (`POST /api/v1/incidents/{incidentId}/generate-test`, `GET /api/v1/incidents/{incidentId}/test-artifacts`)
 - **8.4 UI Code Generator & Download** — ✅ Added "Generate JUnit Test" button, framework selector, copy code, and `.java` file download button in `aftermath-ui`
@@ -91,7 +91,7 @@
 ## 9. Phase 6 — CLI Tool — ✅ COMPLETED
 
 - **9.1 CLI Module Setup** — ✅ Built `aftermath-cli` module with Picocli & Spring Boot CLI framework
-- **9.2 CLI Subcommands** — ✅ Implemented `aftermath status`, `aftermath list`, `aftermath view <incident-id>`, `aftermath replay <incident-id>`, and `aftermath testgen <incident-id>`
+- **9.2 CLI Subcommands** — ✅ Implemented `aftermath status`, `aftermath list`, `aftermath view <incident-id>`, `aftermath replay <incident-id>`, `aftermath testgen <incident-id>`, `aftermath curl <incident-id>`, `aftermath analyze <incident-id>`, and `aftermath attach`
 - **9.3 Monorepo Packaging** — ✅ Packaged executable `aftermath-cli-0.1.0-SNAPSHOT.jar`
 - **9.4 End-to-End CLI Test** — ✅ Verified CLI status and table formatting against live Collector service
 
@@ -132,8 +132,12 @@
 
 ---
 
-## 14. Enterprise Level Upgrades (v1.3.0) — ✅ COMPLETED
+## 14. 100% Market Complete Release (v2.0.0) — ✅ COMPLETED
 
 - **14.1 WireMock Auto-Mocking Test Generator (`JUNIT5_WIREMOCK`)** — ✅ Generates standalone WireMock server stubs in `.java` test files for zero-dependency CI/CD execution without running real external microservices.
 - **14.2 Non-HTTP Background & Async Interceptor (`AftermathAspectInterceptor`)** — ✅ Spring `@Aspect` catching uncaught failures in background `@Scheduled` cron jobs and `@Async` thread executions.
 - **14.3 JVM System & CPU Context Snapshot (`SystemSnapshot`)** — ✅ Captures free memory, max memory, active thread count, and CPU load at the exact millisecond of failure.
+- **14.4 1-Click Global Installers (`install.ps1` & `install.sh`)** — ✅ 1-Click shell & PowerShell installation scripts packaging `aftermath-cli` into user system PATH.
+- **14.5 GitHub Action CI/CD Integration (`aftermath-action`)** — ✅ Composite GitHub Action (`action.yml`) verifying Pull Requests against captured reproduction tests.
+- **14.6 OpenTelemetry Distributed Trace Propagation (`OpenTelemetryTraceInterceptor`)** — ✅ Extracts W3C `traceparent`, B3, Datadog, and MDC trace IDs across distributed microservice calls.
+- **14.7 VS Code Extension Prototype (`aftermath-vscode`)** — ✅ VS Code extension manifest and extension activation script.

@@ -1,0 +1,32 @@
+{
+  "name": "aftermath-vscode",
+  "displayName": "AFTERMATH Failure & Incident Replayer",
+  "description": "View production incidents, stack traces, and generate JUnit reproduction tests directly inside VS Code",
+  "version": "1.0.0",
+  "publisher": "aftermath",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Testing",
+    "Debugging",
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:aftermath.listIncidents",
+    "onCommand:aftermath.attach"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "aftermath.listIncidents",
+        "title": "AFTERMATH: Fetch Captured Incidents"
+      },
+      {
+        "command": "aftermath.attach",
+        "title": "AFTERMATH: Zero-Touch Auto-Attach to Project"
+      }
+    ]
+  }
+}

@@ -80,10 +80,7 @@ public class CaptureFilter implements Filter {
     }
 
     private void captureIncident(RequestWrapper request, int statusCode, Throwable exception, long startTime) {
-        String traceId = MDC.get("traceId");
-        if (traceId == null) {
-            traceId = request.getHeader("X-Trace-Id");
-        }
+        String traceId = dev.aftermath.sdk.context.OpenTelemetryTraceInterceptor.extractTraceId(request);
         if (traceId == null) {
             traceId = UUID.randomUUID().toString();
         }

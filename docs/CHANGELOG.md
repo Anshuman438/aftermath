@@ -4,48 +4,51 @@ All notable changes to the AFTERMATH platform will be documented in this file.
 
 ---
 
+## [v2.0.0] - 2026-08-26
+
+### 🎉 100% Market Mastery & Enterprise Release
+- **1-Click System Installers (`install.ps1` & `install.sh`)**: Global installation scripts for Windows PowerShell and Linux/macOS bash adding `aftermath` CLI to user PATH.
+- **GitHub Action Integration (`aftermath-action`)**: GitHub Composite Action (`action.yml`) to automatically verify Pull Requests against captured reproduction tests.
+- **OpenTelemetry Distributed Trace Context Propagation (`OpenTelemetryTraceInterceptor`)**: Extracts W3C `traceparent`, B3, Datadog `x-datadog-trace-id`, and SLF4J MDC trace context across microservices.
+- **VS Code Extension Prototype (`aftermath-vscode`)**: VS Code extension manifest (`package.json`) and `extension.js` providing inline incident fetching and project attachment.
+- **WireMock Auto-Mocking Test Generator (`JUNIT5_WIREMOCK`)**: Generates standalone WireMock stubs in `.java` test files for zero-dependency CI/CD execution.
+- **Non-HTTP Background & Async Interceptor (`AftermathAspectInterceptor`)**: Spring `@Aspect` catching uncaught failures in `@Scheduled` and `@Async` tasks.
+- **JVM System Context Snapshot (`SystemSnapshot`)**: Captures free memory, max memory, thread count, and CPU load at failure time.
+
+---
+
 ## [v1.3.0] - 2026-08-26
 
 ### 🚀 Enterprise Features
-- **WireMock Auto-Mocking Test Generator (`JUNIT5_WIREMOCK`)**:
-  - Automatically generates standalone WireMock server stubs in JUnit 5 `.java` test files.
-  - Allows generated reproduction tests to run **100% standalone in CI/CD pipelines without needing external microservices or real databases running**.
-  - Integrated into Web UI framework selector dropdown and REST API.
-- **Non-HTTP Background & Async Exception Interceptor**:
-  - Implemented `AftermathAspectInterceptor` (`@Aspect`) in `aftermath-sdk`.
-  - Captures uncaught failures in background `@Scheduled` cron tasks and `@Async` thread executions.
-- **JVM System Context & Health Snapshot**:
-  - Implemented `SystemSnapshot` in `aftermath-sdk` model.
-  - Captures free memory, total memory, max memory, active thread count, and CPU load at the exact millisecond of incident failure.
+- **WireMock Auto-Mocking Test Generator (`JUNIT5_WIREMOCK`)**
+- **Non-HTTP Background & Async Exception Interceptor**
+- **JVM System Context & Health Snapshot**
 
 ---
 
 ## [v1.2.1] - 2026-08-26
 
 ### 🛡️ Security & Reliability Fixes
-- **XXE Injection Vulnerability Fix (BUG-001)**: Disabled DTDs and external entities in `PomXmlInjector` and `ProjectDetector`.
-- **SSRF Prevention Fix (BUG-002)**: Added target URL scheme and host validation in `ReplayExecutor` blocking AWS/GCP cloud metadata IPs (`169.254.169.254`).
-- **Input Validation Fix (BUG-003)**: Added `@Valid` and Jakarta Validation (`@NotBlank`, `@Size`) to `CreateIncidentRequest` and `IncidentController`.
-- **Database Hardening Fix (BUG-004)**: Disabled H2 Web Console in `application.yml` and configured secure database password.
-- **Thread Safety Fix (BUG-005)**: Replaced raw `int` thread counter in `AsyncEventDispatcher` with `AtomicInteger`.
-- **Database Storage Capacity Fix (BUG-007)**: Expanded `stackTrace` and `rawJson` database columns in `IncidentEntity` to 65,535 characters.
-- **Global Error Handling (BUG-009)**: Created `@RestControllerAdvice` `GlobalExceptionHandler` for structured HTTP 400/404/500 error responses.
+- **XXE Injection Vulnerability Fix (BUG-001)**
+- **SSRF Prevention Fix (BUG-002)**
+- **Input Validation Fix (BUG-003)**
+- **Database Hardening Fix (BUG-004)**
 
 ---
 
 ## [v1.2.0] - 2026-08-26
 
 ### 🚀 Added
-- **SHA-256 Incident Deduplication Engine**: `fingerprint`, `occurrenceCount`, `lastSeenAt`, and Web UI occurrence badge (`2x`, `3x`).
-- **cURL Command Exporter**: `aftermath curl <incident-id>` command to export request capsules as runnable cURL scripts.
-- **AI-Powered Root Cause Analysis**: `aftermath analyze <incident-id>` command outputting failing class, line number, root cause summary, recommended fix, and suggested Git code diffs.
+- **SHA-256 Incident Deduplication Engine**
+- **cURL Command Exporter**
+- **AI-Powered Root Cause Analysis**
 
 ---
 
 ## [v1.1.0] - 2026-08-26
 
 ### 🚀 Added
-- **Zero-Touch Developer Auto-Attacher (`aftermath attach`)**: Picocli subcommand auto-detecting Maven/Gradle and auto-injecting `aftermath-sdk` dependency and `application.yml` config.
+- **Zero-Touch Developer Auto-Attacher (`aftermath attach`)**
 
 ---
 
