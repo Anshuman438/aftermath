@@ -1,0 +1,16 @@
+<idea-plugin>
+    <id>dev.aftermath.intellij</id>
+    <name>AFTERMATH Failure Replayer & Test Generator</name>
+    <vendor email="dev@aftermath.dev">AFTERMATH Enterprise</vendor>
+
+    <description><![CDATA[
+      Zero-touch incident replayer, stack trace analyzer, and automated JUnit test generator directly inside JetBrains IntelliJ IDEA.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="AFTERMATH" anchor="right" factoryClass="dev.aftermath.intellij.ToolWindowFactory"/>
+    </extensions>
+</idea-plugin>

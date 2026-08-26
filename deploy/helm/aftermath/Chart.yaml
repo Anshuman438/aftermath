@@ -1,0 +1,9 @@
+apiVersion: v2
+name: aftermath
+description: Helm Chart for deploying AFTERMATH Collector and High-Throughput Engine on Kubernetes
+type: application
+version: 1.0.0
+appVersion: "5.0.0"
+maintainers:
+  - name: AFTERMATH Core Team
+    email: dev@aftermath.dev

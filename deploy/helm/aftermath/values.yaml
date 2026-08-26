@@ -1,0 +1,26 @@
+replicaCount: 3
+
+image:
+  repository: aftermath/collector
+  pullPolicy: IfNotPresent
+  tag: "v5.0.0"
+
+service:
+  type: ClusterIP
+  port: 8090
+
+resources:
+  limits:
+    cpu: 2000m
+    memory: 4Gi
+  requests:
+    cpu: 500m
+    memory: 1Gi
+
+kafka:
+  enabled: true
+  brokers: "kafka-cluster:9092"
+
+database:
+  type: postgresql
+  url: "jdbc:postgresql://postgres-cluster:5432/aftermath_db"

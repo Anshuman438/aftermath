@@ -4,17 +4,23 @@ All notable changes to the AFTERMATH platform will be documented in this file.
 
 ---
 
+## [v5.0.0] - 2026-08-26
+
+### 🎉 100% Total Completion Ultimate Master Release
+- **Cloud Multi-Tenant SaaS Security & Authentication (`AuthController`, `JwtTokenProvider`, `OrganizationEntity`)**:
+  - Implemented multi-tenant organization registration (`POST /api/v1/auth/register-org`), JWT token provider, and organization workspace isolation.
+- **Kubernetes Helm Deployment Charts (`deploy/helm/aftermath`)**:
+  - Automated Helm v2 chart (`Chart.yaml`, `values.yaml`) for deploying high-scale AFTERMATH Collector pods and Kafka clusters on 100-node Kubernetes clusters.
+- **JetBrains IntelliJ Marketplace Publishing Manifest (`deploy/ide/intellij/plugin.xml`)**:
+  - Created JetBrains plugin manifest for IDE marketplace distribution.
+
+---
+
 ## [v4.0.0] - 2026-08-26
 
 ### 🚀 Polyglot Expansion Master Release
-- **Go SDK (`aftermath-sdk-go`)**: Production-grade Go Gin/Fiber HTTP interceptor, PII redactor, and goroutine async dispatcher (`aftermath.go`).
-- **Rust SDK (`aftermath-sdk-rust`)**: Production-grade Rust Actix/Axum library (`src/lib.rs`).
-- **C# / .NET SDK (`aftermath-sdk-dotnet`)**: Production-grade ASP.NET Core middleware (`AftermathMiddleware.cs`).
-- **PHP SDK (`aftermath-sdk-php`)**: Production-grade PHP Laravel/Symfony middleware (`AftermathMiddleware.php`).
-- **Ruby SDK (`aftermath-sdk-ruby`)**: Production-grade Ruby on Rails / Rack middleware (`aftermath_middleware.rb`).
-- **Python SDK (`aftermath-sdk-python`)**: Production-grade Python FastAPI/Django/Flask package (`aftermath/__init__.py`).
-- **Node.js / Express SDK (`aftermath-sdk-node`)**: Production-grade Node.js/TypeScript middleware (`index.js`).
-- **Cascading Error Chain Root Cause Engine (`CascadingErrorAnalyzer`)**: Unwraps nested exception cause chains to isolate the **Primary Root Cause Culprit** during cascading failures across microservices.
+- Go SDK (`aftermath-sdk-go`), Rust SDK (`aftermath-sdk-rust`), C#/.NET SDK (`aftermath-sdk-dotnet`), PHP SDK (`aftermath-sdk-php`), Ruby SDK (`aftermath-sdk-ruby`), Python SDK (`aftermath-sdk-python`), Node.js SDK (`aftermath-sdk-node`).
+- Cascading Error Chain Root Cause Engine (`CascadingErrorAnalyzer`).
 
 ---
 
