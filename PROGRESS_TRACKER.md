@@ -17,7 +17,7 @@
 ## 2. Project Structure & Repository — ✅ COMPLETED
 
 - **2.1 Initialize Git Repository** — ✅ Repository initialized
-- **2.2 Create Monorepo Structure** — ✅ Created submodules (`aftermath-sdk`, `aftermath-sdk-node`, `aftermath-sdk-python`, `aftermath-collector`, `aftermath-ui`, `aftermath-replay`, `aftermath-testgen`, `aftermath-cli`, `sample-app`, `docs`, `aftermath-action`, `aftermath-vscode`)
+- **2.2 Create Monorepo Structure** — ✅ Created submodules (`aftermath-sdk`, `aftermath-sdk-node`, `aftermath-sdk-python`, `aftermath-sdk-go`, `aftermath-sdk-rust`, `aftermath-sdk-dotnet`, `aftermath-sdk-php`, `aftermath-sdk-ruby`, `aftermath-collector`, `aftermath-ui`, `aftermath-replay`, `aftermath-testgen`, `aftermath-cli`, `sample-app`, `docs`, `aftermath-action`, `aftermath-vscode`)
 - **2.3 Create Parent POM** — ✅ Created parent `pom.xml` with Java 21 & Spring Boot 3.3.0 dependencies
 - **2.4 Create .gitignore** — ✅ Added standard Java/Node/SQLite/Docker ignore patterns
 - **2.5 Initial Commit** — ✅ Committed initial repository state (`3108ecc`)
@@ -144,9 +144,13 @@
 
 ---
 
-## 15. Enterprise Polyglot & Cascading Error Root Cause Engine (v3.2.0) — ✅ COMPLETED
+## 15. Polyglot Language Expansion Master Release (v4.0.0) — ✅ COMPLETED
 
-- **15.1 Cascading Error Chain Root Cause Engine (`CascadingErrorAnalyzer`)** — ✅ Unwraps nested `Throwable` cause chains to isolate the **Primary Root Cause Culprit** (the first domino that fell) during cascading microservice failures.
-- **15.2 Polyglot Node.js / Express SDK (`aftermath-sdk-node`)** — ✅ NPM SDK module for Express error interceptor, JS PII redactor, and async transport.
-- **15.3 Polyglot Python SDK (`aftermath-sdk-python`)** — ✅ Python package module (`aftermath`) for FastAPI, Flask, and Django exception interception.
-- **15.4 Cascading Analysis Endpoint** — ✅ Exposed `/api/v1/incidents/{incidentId}/cascading-analysis`.
+- **15.1 Go SDK (`aftermath-sdk-go`)** — ✅ Production-grade Go Gin/Fiber HTTP interceptor, PII redactor, and goroutine async dispatcher (`aftermath.go`).
+- **15.2 Rust SDK (`aftermath-sdk-rust`)** — ✅ Production-grade Rust Actix/Axum library (`src/lib.rs`).
+- **15.3 C# / .NET SDK (`aftermath-sdk-dotnet`)** — ✅ Production-grade ASP.NET Core middleware (`AftermathMiddleware.cs`).
+- **15.4 PHP SDK (`aftermath-sdk-php`)** — ✅ Production-grade PHP Laravel/Symfony middleware (`AftermathMiddleware.php`).
+- **15.5 Ruby SDK (`aftermath-sdk-ruby`)** — ✅ Production-grade Ruby on Rails / Rack middleware (`aftermath_middleware.rb`).
+- **15.6 Python SDK (`aftermath-sdk-python`)** — ✅ Production-grade Python FastAPI/Django/Flask package (`aftermath/__init__.py`).
+- **15.7 Node.js / Express SDK (`aftermath-sdk-node`)** — ✅ Production-grade Node.js/TypeScript middleware (`index.js`).
+- **15.8 Cascading Error Chain Root Cause Engine (`CascadingErrorAnalyzer`)** — ✅ Isolates the primary root cause culprit line during cascading microservice failures.
