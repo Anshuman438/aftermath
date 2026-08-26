@@ -129,3 +129,11 @@
 - **13.5 BUG-005 (Thread Safety in Event Dispatcher)** — ✅ Fixed in `AsyncEventDispatcher` using `AtomicInteger`
 - **13.6 BUG-007 (Stack Trace Database Capacity)** — ✅ Fixed in `IncidentEntity` expanding `stackTrace` and `rawJson` to 65,535 chars
 - **13.7 BUG-009 (Global Exception Handling)** — ✅ Implemented `GlobalExceptionHandler` with structured JSON error responses
+
+---
+
+## 14. Enterprise Level Upgrades (v1.3.0) — ✅ COMPLETED
+
+- **14.1 WireMock Auto-Mocking Test Generator (`JUNIT5_WIREMOCK`)** — ✅ Generates standalone WireMock server stubs in `.java` test files for zero-dependency CI/CD execution without running real external microservices.
+- **14.2 Non-HTTP Background & Async Interceptor (`AftermathAspectInterceptor`)** — ✅ Spring `@Aspect` catching uncaught failures in background `@Scheduled` cron jobs and `@Async` thread executions.
+- **14.3 JVM System & CPU Context Snapshot (`SystemSnapshot`)** — ✅ Captures free memory, max memory, active thread count, and CPU load at the exact millisecond of failure.

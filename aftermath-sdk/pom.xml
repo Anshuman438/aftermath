@@ -24,6 +24,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Spring Boot AOP (provided scope — for background @Scheduled & @Async capture) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Jackson for JSON serialization -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

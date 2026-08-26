@@ -1,5 +1,6 @@
 package dev.aftermath.sdk;
 
+import dev.aftermath.sdk.capture.AftermathAspectInterceptor;
 import dev.aftermath.sdk.capture.CaptureFilter;
 import dev.aftermath.sdk.capture.FailureDetector;
 import dev.aftermath.sdk.model.DeploymentInfo;
@@ -9,6 +10,7 @@ import dev.aftermath.sdk.transport.EventTransport;
 import dev.aftermath.sdk.transport.HttpEventTransport;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -50,6 +52,12 @@ public class AftermathAutoConfiguration {
     public EventTransport aftermathEventTransport(AftermathProperties properties) {
         HttpEventTransport httpTransport = new HttpEventTransport(properties.getCollectorUrl());
         return new AsyncEventDispatcher(httpTransport);
+    }
+
+    @Bean
+    @ConditionalOnClass(name = "org.aspectj.lang.annotation.Aspect")
+    public AftermathAspectInterceptor aftermathAspectInterceptor(EventTransport transport, DeploymentInfo deploymentInfo) {
+        return new AftermathAspectInterceptor(transport, deploymentInfo);
     }
 
     @Bean

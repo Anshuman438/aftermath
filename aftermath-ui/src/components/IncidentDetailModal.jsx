@@ -341,6 +341,7 @@ export default function IncidentDetailModal({ incident, onClose }) {
                 <option value="JUNIT5_RESTASSURED">JUnit 5 + REST-Assured</option>
                 <option value="JUNIT5_MOCKMVC">JUnit 5 + MockMvc</option>
                 <option value="JUNIT5_WEBTESTCLIENT">JUnit 5 + WebTestClient</option>
+                <option value="JUNIT5_WIREMOCK">JUnit 5 + WireMock (Standalone Stub)</option>
               </select>
             </div>
           </div>

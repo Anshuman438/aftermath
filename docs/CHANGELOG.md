@@ -4,10 +4,26 @@ All notable changes to the AFTERMATH platform will be documented in this file.
 
 ---
 
+## [v1.3.0] - 2026-08-26
+
+### 🚀 Enterprise Features
+- **WireMock Auto-Mocking Test Generator (`JUNIT5_WIREMOCK`)**:
+  - Automatically generates standalone WireMock server stubs in JUnit 5 `.java` test files.
+  - Allows generated reproduction tests to run **100% standalone in CI/CD pipelines without needing external microservices or real databases running**.
+  - Integrated into Web UI framework selector dropdown and REST API.
+- **Non-HTTP Background & Async Exception Interceptor**:
+  - Implemented `AftermathAspectInterceptor` (`@Aspect`) in `aftermath-sdk`.
+  - Captures uncaught failures in background `@Scheduled` cron tasks and `@Async` thread executions.
+- **JVM System Context & Health Snapshot**:
+  - Implemented `SystemSnapshot` in `aftermath-sdk` model.
+  - Captures free memory, total memory, max memory, active thread count, and CPU load at the exact millisecond of incident failure.
+
+---
+
 ## [v1.2.1] - 2026-08-26
 
 ### 🛡️ Security & Reliability Fixes
-- **XXE Injection Vulnerability Fix (BUG-001)**: Disabled DTDs and external entities in `PomXmlInjector` and `ProjectDetector` XML parsers.
+- **XXE Injection Vulnerability Fix (BUG-001)**: Disabled DTDs and external entities in `PomXmlInjector` and `ProjectDetector`.
 - **SSRF Prevention Fix (BUG-002)**: Added target URL scheme and host validation in `ReplayExecutor` blocking AWS/GCP cloud metadata IPs (`169.254.169.254`).
 - **Input Validation Fix (BUG-003)**: Added `@Valid` and Jakarta Validation (`@NotBlank`, `@Size`) to `CreateIncidentRequest` and `IncidentController`.
 - **Database Hardening Fix (BUG-004)**: Disabled H2 Web Console in `application.yml` and configured secure database password.

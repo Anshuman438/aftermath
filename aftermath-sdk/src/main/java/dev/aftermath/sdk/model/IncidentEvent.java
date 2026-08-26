@@ -9,10 +9,12 @@ public class IncidentEvent {
     private RequestSnapshot request;
     private ErrorSnapshot error;
     private DeploymentInfo deployment;
+    private SystemSnapshot system;
 
     public IncidentEvent() {
         this.incidentId = UUID.randomUUID().toString();
         this.timestamp = System.currentTimeMillis();
+        this.system = new SystemSnapshot();
     }
 
     public IncidentEvent(String traceId, RequestSnapshot request, ErrorSnapshot error, DeploymentInfo deployment) {
@@ -22,6 +24,7 @@ public class IncidentEvent {
         this.request = request;
         this.error = error;
         this.deployment = deployment;
+        this.system = new SystemSnapshot();
     }
 
     public String getIncidentId() {
@@ -70,5 +73,13 @@ public class IncidentEvent {
 
     public void setDeployment(DeploymentInfo deployment) {
         this.deployment = deployment;
+    }
+
+    public SystemSnapshot getSystem() {
+        return system;
+    }
+
+    public void setSystem(SystemSnapshot system) {
+        this.system = system;
     }
 }
